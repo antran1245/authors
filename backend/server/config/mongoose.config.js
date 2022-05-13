@@ -1,6 +1,6 @@
-const const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/db_name", {
+mongoose.connect("mongodb://127.0.0.1:27017/authors", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })

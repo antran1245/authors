@@ -1,4 +1,4 @@
-const const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const AuthorSchema = new mongoose.Schema({
     name: {
@@ -8,7 +8,7 @@ const AuthorSchema = new mongoose.Schema({
     },
 }, {timestamps: true});
 
-const Author = mongoose.model('Author', AuthorSchema);
+const Authors = mongoose.model('Authors', AuthorSchema);
 
-module.exports = Author;
+module.exports = Authors;
 

@@ -15,28 +15,36 @@ module.exports.createAuthor = (req, res) => {
     .catch(err => res.json(err))
 }
 
-module.exports.findAllAuthor = (req, res) => {
+module.exports.findAllAuthors = (req, res) => {
     Author.find()
     .then(allAuthors => res.json(allAuthors))
     .catch(err => res.json(err))
 }
 
 module.exports.findOneAuthor = (req, res) => {
-    Author.find({_id: req.params.id})
+    Author.find({_id: req.params._id})
     .then(author => res.json(author))
     .catch(err => res.json(err))
 }
 
 module.exports.updateAuthor = (req, res) => {
     Author.findOneAndUpdate(
-        {_id: req.params.id},
+        {_id: req.params._id},
         req.body,
         {new: true, runValidators: true}
     )
+    .then(author => res.json(author))
+    .catch(err => res.json(err))
 }
 
 module.exports.deleteOneAuthor = (req, res) => {
-    Author.deleteOne({_id:req.params.id})
+    Author.deleteOne({_id:req.params._id})
     .then(deleteOne => res.json(deleteOne))
+    .catch(err => res.json(err))
+}
+
+module.exports.deleteManyAuthor = (req, res) => {
+    Author.deleteMany()
+    .then(deleteAll => res.json(deleteAll))
     .catch(err => res.json(err))
 }
