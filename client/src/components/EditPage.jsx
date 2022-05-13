@@ -8,23 +8,38 @@ export default () => {
     const {_id} = useParams();
     const navigate = useNavigate();
     const [name, setName] = useState()
+    const [error, setError] = useState([])
 
     useEffect(() => {
         const callAxios = async() => {
-            const res = await axios.get(`http://localhost:8000/api/authors/${_id}`)
-            setName(res.data[0].name)
+            try {
+                const res = await axios.get(`http://localhost:8000/api/authors/${_id}`)
+                setName(res.data[0].name)
+            } catch (err) {
+                console(err)
+            }
         }
         callAxios()
-        .catch(err => console.log(err))
     }, [])
 
     const updateAuthor = async(form) => {
-        await axios.put(`http://localhost:8000/api/authors/${_id}`, form);
-        navigate('/');
+        try {
+            await axios.put(`http://localhost:8000/api/authors/${_id}`, form);
+            navigate('/');
+        } catch (err){
+            console.log(err.response.data.errors)
+            const errorResponse = err.response.data.errors;
+            const errorArr = [];
+            for(const key of Object.keys(errorResponse)) {
+                errorArr.push(errorResponse[key].message)
+            }
+            setError(errorArr);
+        }
     }
     return(
         <div>
             <LinkInfo text="Edit this author" link="Home" path="/"/>
+            {error.map((err, i) => <p key={i}>{err}</p>)}
             <Form onSubmit={updateAuthor} text={name}/>
         </div>
     );

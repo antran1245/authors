@@ -10,9 +10,10 @@ module.exports.createAuthor = (req, res) => {
     const { name } = req.body;
     Author.create({
         name
-    })
+    },
+    {runValidators: true})
     .then(author => res.json(author))
-    .catch(err => res.json(err))
+    .catch(err => res.status(400).json(err))
 }
 
 module.exports.findAllAuthors = (req, res) => {
@@ -34,7 +35,7 @@ module.exports.updateAuthor = (req, res) => {
         {new: true, runValidators: true}
     )
     .then(author => res.json(author))
-    .catch(err => res.json(err))
+    .catch(err => res.status(400).json(err))
 }
 
 module.exports.deleteOneAuthor = (req, res) => {

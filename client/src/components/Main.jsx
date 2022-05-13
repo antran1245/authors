@@ -13,7 +13,6 @@ export default () => {
     useEffect(() => {
         const axiosCall = async() => {
             const res = await axios.get('http://localhost:8000/api/authors');
-            console.log(res.data)
             setList(res.data)
         }
         axiosCall()
