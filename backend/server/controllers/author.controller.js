@@ -10,7 +10,7 @@ module.exports.createAuthor = (req, res) => {
     const { name } = req.body;
     Author.create({
         name
-    }
+    })
     .then(author => res.json(author))
     .catch(err => res.status(400).json(err))
 }
